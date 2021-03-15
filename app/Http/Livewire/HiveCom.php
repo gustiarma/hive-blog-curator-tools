@@ -10,7 +10,7 @@ class HiveCom extends Component
     //
     public $limitPost = 100;
     public $maxPayout = 10;
-    public $maxHour = 0;
+    public $maxHour = 2;
 
     //
     public $ttl = 300;
