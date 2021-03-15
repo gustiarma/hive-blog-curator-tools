@@ -47,7 +47,7 @@ if (!function_exists('getCommunityPosts')) {
                 'observer' => NULL,
             ),
         ));
-        {"id":2,"jsonrpc":"2.0","method":"bridge.get_ranked_posts","params":{"tag":"hive-174578","sort":"created","limit":21,"start_author":null,"start_permlink":null,"observer":null}}
+
 
         // $data = '{"id":11,"jsonrpc":"2.0","method":"bridge.get_ranked_posts","params":{"tag":"' . $communityName . '","sort":"created","limit":21,"start_author":null,"start_permlink":null,"observer":null}}';
         $response = cUrl($data);
