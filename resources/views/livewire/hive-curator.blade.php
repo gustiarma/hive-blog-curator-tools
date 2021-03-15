@@ -15,7 +15,7 @@
       <li class="p-4 m-2  bg-white shadow rounded-lg " :key='{{ $item->name }}'>
         <a href="{{ route('goto.community', ['community' => $item->name]) }}" class="">
           <div class="flex items-center">
-            <img class="w-10 h-10 rounded-full lazy" data-src="{{ $item->avatar_url }}" alt="{{ $item->title }}">
+            <img class="w-10 h-10 rounded-full lazy" data-src="https://images.hive.blog/40x40/{{ $item->avatar_url }}" src="https://images.hive.blog/40x40/{{ $item->avatar_url }}">
             <p class="ml-2 text-gray-700 font-semibold font-sans tracking-wide">{{ $item->title }}</p>
           </div>
         </a>

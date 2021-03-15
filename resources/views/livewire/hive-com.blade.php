@@ -59,15 +59,15 @@
 
 
       <li
-        class="p-4 m-2  bg-white shadow rounded-md {{ $item->payout <= $maxPayout && getMinuteAfterPosted($item->created) >= $maxHour && !in_array('cross-post', $item->json_metadata->tags) ? '' : 'hidden' }} "
+        class="p-4 m-2  bg-white shadow rounded-md {{ $item->payout <= $maxPayout && isset($item->stats->is_pinned) === false && getMinuteAfterPosted($item->created) >= $maxHour && !in_array('cross-post', $item->json_metadata->tags) ? '' : 'hidden' }} "
         :key='{{ $item->post_id }}' data-clipboard-text="https://peakd.com{{ $item->url }}">
         {{-- <a href="" class=""> --}}
         <div class="flex flex-row items-center">
           <div class="flex flex-1 flex-none flex-col ">
             <img class="lazy w-20 h-20"
               onError="this.onerror=null;this.src='https://www.google.com/images/errors/robot.png';"
-              data-src="{{ isset($item->json_metadata->image[0]) ? (strpos($item->json_metadata->image[0], '.gif') !== false ? 'https://www.google.com/images/errors/robot.png' : $item->json_metadata->image[0]) : '' }}"
-              alt="Post - {{ $item->post_id }}">
+              data-src="{{ isset($item->json_metadata->image[0]) ? 'https://images.hive.blog/80x80/' . $item->json_metadata->image[0] : '' }}"
+              src="{{ isset($item->json_metadata->image[0]) ? 'https://images.hive.blog/80x80/' . $item->json_metadata->image[0] : '' }}">
 
 
 
@@ -87,8 +87,30 @@
               <a href="https://peakd.com{{ $item->url }}" target="_blank">{{ $item->title }}</a>
             </p>
 
-            <p class="ml-2 mt-2 font-mono tracking-wide"> Payout : {{ $item->payout }} Hive</p>
-            <p class="ml-2 font-mono tracking-wide">Posted : {{ getMinuteAfterPosted($item->created) }} Hour Ago</p>
+
+            <div
+              class="info ml-2 mb-0 font-mono tracking-wide flex space-x-5 pt-3 text-gray-500 border-t border-gray-300">
+
+              <div class="author flex flex-row p-1 border-grey-500 items-center">
+                <img class="w-5 h-5 rounded-full lazy entered loaded"
+                  data-src="https://images.hive.blog/u/{{ $item->author }}/avatar/small"
+                  src="https://images.hive.blog/u/{{ $item->author }}/avatar/small" data-ll-status="loaded">
+
+                <a href="https://peakd.com/@{{ $item->author }}" class="ml-1" target="_blank">
+                  {{ $item->author }}</a>
+              </div>
+
+              <div class="payout flex flex-row p-1 border-grey-500 ml-0">
+                <span class="text-red-700 mr-1">$</span> {{ $item->payout }}
+              </div>
+              <div class="flex flex-row p-1 border-grey-500 ml-0">
+                {{ getMinuteAfterPosted($item->created) }} Hours Ago
+              </div>
+
+            </div>
+
+
+
 
 
           </div>
