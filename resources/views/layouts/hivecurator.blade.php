@@ -12,7 +12,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" crossorigin="anonymous"></script>
-
+  <script async src="https://www.andreaverlicchi.eu/vanilla-lazyload/dist/lazyload.min.js"></script>
   @yield('title')
   @livewireStyles
   <style>
@@ -68,6 +68,18 @@
       e.clearSelection();
       toastr.success('Url Copied To Clipboard')
     });
+
+    window.lazyLoadOptions = {
+      threshold: 0,
+
+    };
+    window.addEventListener(
+      "LazyLoad::Initialized",
+      function(e) {
+        console.log(e.detail.instance);
+      },
+      false
+    );
 
   </script>
 </body>

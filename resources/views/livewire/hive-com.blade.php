@@ -64,9 +64,9 @@
         {{-- <a href="" class=""> --}}
         <div class="flex flex-row items-center">
           <div class="flex flex-1 flex-none flex-col ">
-            <img class="w-20 h-20 lazyload" loading="lazy"
+            <img class="lazy w-20 h-20"
               onError="this.onerror=null;this.src='https://www.google.com/images/errors/robot.png';"
-              src=" {{ isset($item->json_metadata->image[0]) ? (strpos($item->json_metadata->image[0], '.gif') !== false ? 'https://www.google.com/images/errors/robot.png' : $item->json_metadata->image[0]) : '' }}"
+              data-src="{{ isset($item->json_metadata->image[0]) ? (strpos($item->json_metadata->image[0], '.gif') !== false ? 'https://www.google.com/images/errors/robot.png' : $item->json_metadata->image[0]) : '' }}"
               alt="Post - {{ $item->post_id }}">
 
 
