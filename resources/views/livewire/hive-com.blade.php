@@ -20,7 +20,7 @@
       </button>
       <input
         class="h-15 px-4 py-2 w-full outline-none focus:outline-none text-center w-full bg-gray-300 font-semibold text-sm hover:text-black focus:text-black  sm:text-basecursor-default flex items-center text-gray-700  outline-none"
-        type="number" wire:model.lazy="maxPayout" placeholder="Max Payout " />
+        type="number" wire:model="maxPayout" placeholder="Max Payout " />
       <button data-action="increment"
         class="bg-gray-300 text-gray-600 outline-none focus:outline-none hover:text-gray-700 hover:bg-gray-400 h-15 w-20 rounded-r cursor-pointer">
         <span class="m-auto text-2xl font-thin" wire:click="addMaxPayout">+</span>
@@ -35,10 +35,17 @@
       </button>
       <input
         class="h-15 px-4 py-2 w-full outline-none focus:outline-none text-center w-full bg-gray-300 font-semibold text-sm hover:text-black focus:text-black  sm:text-basecursor-default flex items-center text-gray-700  outline-none"
-        type="number" wire:model.lazy="maxHour" placeholder="Max Hour " />
+        type="number" wire:model="maxHour" placeholder="Max Hour " />
       <button data-action="increment"
         class="bg-gray-300 text-gray-600 outline-none focus:outline-none hover:text-gray-700 hover:bg-gray-400 h-15 w-20 rounded-r cursor-pointer">
         <span class="m-auto text-2xl font-thin" wire:click="addMaxHour">+</span>
+      </button>
+    </div>
+
+    <div class="flex h-15  sm:w-full  md:w-1/3 ">
+      <button data-action="increment"
+        class="bg-gray-300 w-full text-gray-600 outline-none focus:outline-none hover:text-gray-700 hover:bg-gray-400 h-15 w-20 rounded-r cursor-pointer">
+        <span class="m-auto text-2xl font-thin" wire:click="addMoreData">Add 100</span>
       </button>
     </div>
 

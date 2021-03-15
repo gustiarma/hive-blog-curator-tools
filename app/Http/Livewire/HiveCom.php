@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Cache;
 class HiveCom extends Component
 {
     //
-    public $limitPost = 20;
+    public $limitPost = 100;
     public $maxPayout = 10;
     public $maxHour = 2;
 
@@ -18,6 +18,7 @@ class HiveCom extends Component
     public $selectedCommunity;
     public function getCommunityInfoProperty()
     {
+
         $communityInfo =   Cache::remember('community-info-' . $this->selectedCommunity, $this->ttl, function () {
             return getCommunityInfo($this->selectedCommunity)->result;
         });
@@ -25,8 +26,9 @@ class HiveCom extends Component
     }
     public function getCommunityPostsProperty()
     {
+        // dd(getCommunityPosts($this->selectedCommunity, $this->limitPost)->result);
         $communityInfo =   Cache::remember('community-posts-' . $this->selectedCommunity, $this->ttl, function () {
-            return getCommunityPosts($this->selectedCommunity)->result;
+            return getCommunityPosts($this->selectedCommunity,$this->limitPost)->result;
         });
         return $communityInfo;
     }
@@ -58,6 +60,11 @@ class HiveCom extends Component
     public function addMaxHour()
     {
         $this->maxHour =  $this->maxHour + 1;
+    }
+
+    public function addMoreData()
+    {
+        $newData = dd($this->getCommunityPostsProperty());
     }
     public function render()
     {
