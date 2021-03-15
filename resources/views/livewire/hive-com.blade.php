@@ -8,7 +8,7 @@
 
 
   <div
-    class="flex flex-col sm:flex-col sm:mt-2 md:flex-row w-full p-4  m-auto   gap-3 align-center justify-center text-center font-mono">
+    class="flex flex-col sm:flex-col sm:mt-5 mt-5 md:flex-row w-full p-4 m-auto  gap-10 align-center justify-center text-center font-mono">
 
 
     <div class="flex h-15 sm:w-full md:w-1/3 ">
