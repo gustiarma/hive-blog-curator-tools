@@ -10,7 +10,7 @@ class HiveCom extends Component
     //
     public $limitPost = 100;
     public $maxPayout = 10;
-    public $maxHour = 2;
+    public $maxHour = 0;
 
     //
     public $ttl = 300;
@@ -18,9 +18,17 @@ class HiveCom extends Component
     public $selectedCommunity;
     public function getCommunityInfoProperty()
     {
+        // dd(getCommunityInfo($this->selectedCommunity));
 
         $communityInfo =   Cache::remember('community-info-' . $this->selectedCommunity, $this->ttl, function () {
-            return getCommunityInfo($this->selectedCommunity)->result;
+            $data = getCommunityInfo($this->selectedCommunity);
+            if (isset(getCommunityInfo($this->selectedCommunity)->result)) {
+
+                return $data->result;
+            } else {
+                Cache::forget('community-info-' . $this->selectedCommunity);
+                return [];
+            }
         });
         return $communityInfo;
     }
@@ -28,7 +36,15 @@ class HiveCom extends Component
     {
         // dd(getCommunityPosts($this->selectedCommunity, $this->limitPost)->result);
         $communityInfo =   Cache::remember('community-posts-' . $this->selectedCommunity, $this->ttl, function () {
-            return getCommunityPosts($this->selectedCommunity,$this->limitPost)->result;
+            $data = getCommunityPosts($this->selectedCommunity, $this->limitPost);
+            if (isset(getCommunityPosts($this->selectedCommunity, $this->limitPost)->result)) {
+                $data = getCommunityPosts($this->selectedCommunity, $this->limitPost)->result;
+                return $data;
+            } else {
+                Cache::forget('community-posts-' . $this->selectedCommunity);
+                return [];
+            }
+            // return getCommunityPosts($this->selectedCommunity, $this->limitPost)->result;
         });
         return $communityInfo;
     }

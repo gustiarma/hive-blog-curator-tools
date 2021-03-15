@@ -1,5 +1,8 @@
 @extends('layouts.hivecurator')
 
+@section('title')
+  <title>Browse Communities</title>
+@endsection
 @section('contentarea')
-@livewire('hive-curator')
+  @livewire('hive-curator')
 @endsection
