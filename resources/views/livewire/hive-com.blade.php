@@ -24,7 +24,7 @@
         class="bg-gray-300 text-gray-600 outline-none focus:outline-none hover:text-gray-700 hover:bg-gray-400 h-15 w-20 rounded-r cursor-pointer">
         <span class="m-auto text-2xl font-thin" wire:click="addMaxPayout">+</span>
       </button>
-    </div>
+</div>
 
     <div class="flex h-15  sm:w-full  md:w-1/3 ">
       <span class="text-sm  px-4 py-2 bg-gray-300 whitespace-no-wrap rounded-l font-semibold">Min Hour</span>
