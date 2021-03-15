@@ -10,4 +10,8 @@ class CuratorController extends Controller
     {
         return view('hivecurator.index');
     }
+    public function community($community)
+    {
+        return view('hivecurator.community', ['community' => $community]);
+    }
 }

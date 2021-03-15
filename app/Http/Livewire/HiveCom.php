@@ -62,7 +62,11 @@ class HiveCom extends Component
     public function render()
     {
         return view('livewire.hive-com')
+            ->layout(
+                'layouts.hivecurator',
+                ['title' => 'something']
+            )
             ->extends('layouts.hivecurator')
-            ->section('contentarea');;
+            ->section('contentarea');
     }
 }

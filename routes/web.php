@@ -19,5 +19,5 @@ use Illuminate\Support\Facades\Route;
 
 // Route::prefix('/')->group(function () {
 // });
-Route::get('', HiveCurator::class);
-Route::get('/c/{community}', HiveCom::class)->name('goto.community');
+Route::get('', [CuratorController::class, 'index'])->name('curator.select-community');
+Route::get('/c/{community}', [CuratorController::class, 'community'])->name('goto.community');
