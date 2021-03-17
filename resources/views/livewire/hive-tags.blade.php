@@ -39,10 +39,16 @@
           {{-- <a href="" class=""> --}}
           <div class="flex flex-row items-center">
             <div class="flex flex-1 flex-none flex-col ">
-              <img class="lazy w-20 h-20"
-                onError="this.onerror=null;this.src='https://www.google.com/images/errors/robot.png';"
-                data-src="{{ isset($item->json_metadata->image[0]) ? 'https://images.hive.blog/80x80/' . $item->json_metadata->image[0] : 'https://images.hive.blog/u/' . $item->author . '/avatar/small' }}"
-                src="{{ isset($item->json_metadata->image[0]) ? 'https://images.hive.blog/80x80/' . $item->json_metadata->image[0] : '' }}">
+              @isset($item->json_metadata->image)
+                @if (is_array($item->json_metadata->image))
+                  <img class="lazy w-20 h-20"
+                    onError="this.onerror=null;this.src='https://www.google.com/images/errors/robot.png';"
+                    data-src="{{ isset($item->json_metadata->image[0]) ? 'https://images.hive.blog/80x80/' . $item->json_metadata->image[0] : 'https://images.hive.blog/u/' . $item->author . '/avatar/small' }}"
+                    src="{{ isset($item->json_metadata->image[0]) ? 'https://images.hive.blog/80x80/' . $item->json_metadata->image[0] : '' }}">
+                @endif
+              @endisset
+
+
 
 
 

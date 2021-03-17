@@ -42,11 +42,11 @@ class HiveTags extends Component
     }
     public function findPostByTags($tagsname)
     {
-        if ($this->selectedTags !== null && $tagsname !== '') {
-            $tagPost =   Cache::remember('community-tags-' . $this->selectedTags, $this->ttl, function () {
-                $data = getTagPosts($this->selectedTags, $this->limitPost);
-                if (isset(getTagPosts($this->selectedTags, $this->limitPost)->result)) {
-                    $data = getTagPosts($this->selectedTags, $this->limitPost)->result;
+        if ($tagsname !== null && $tagsname !== '') {
+            $tagPost =   Cache::remember('community-tags-' . $tagsname, $this->ttl, function () use ($tagsname) {
+                $data = getTagPosts($tagsname, $this->limitPost);
+                if (isset(getTagPosts($tagsname, $this->limitPost)->result)) {
+                    $data = getTagPosts($tagsname, $this->limitPost)->result;
                     return $data;
                 } else {
                     Cache::forget('community-tags-' . $tagsname);
