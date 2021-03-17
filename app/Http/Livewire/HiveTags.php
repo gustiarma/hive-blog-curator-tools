@@ -64,6 +64,11 @@ class HiveTags extends Component
     }
 
 
+    public function resetFilterArea()
+    {
+        $this->reset('selectedTags');
+    }
+
     public function updatedLimitPost()
     {
         Cache::forget('community-tags-' . $this->selectedTags);

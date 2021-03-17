@@ -31,6 +31,8 @@
     <atom-spinner :animation-duration="1000" :size="160" :color="'#1f6492'" />
   </span>
   <ul class="bg-dark grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-2">
+
+
     @forelse ($tagPosts as $item)
       @isset($item->payout)
         <li
