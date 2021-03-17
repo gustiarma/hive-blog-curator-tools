@@ -126,9 +126,7 @@
     @endforelse
   </ul>
 
-  <pre>
-{{ $selectedTags }}
-  </pre>
+
 
 
 
