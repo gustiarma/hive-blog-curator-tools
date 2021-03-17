@@ -19,5 +19,8 @@ use Illuminate\Support\Facades\Route;
 
 // Route::prefix('/')->group(function () {
 // });
-Route::get('', [CuratorController::class, 'index'])->name('curator.select-community');
+
+Route::get('/', [CuratorController::class, 'index'])->name('curator.tools.index');
+Route::get('/search-by-tags', [CuratorController::class, 'tags'])->name('curator.search-tags');
+Route::get('/search-by-communities', [CuratorController::class, 'communities'])->name('curator.select-community');
 Route::get('/c/{community}', [CuratorController::class, 'community'])->name('goto.community');

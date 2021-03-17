@@ -56,6 +56,33 @@ if (!function_exists('getCommunityPosts')) {
 
     }
 }
+if (!function_exists('getTagPosts')) {
+    function getTagPosts($tagsname, $limit = 20, $startAuthor = null, $startPermalink = null)
+    {
+        $data  = json_encode(array(
+            'id' => 3,
+            'jsonrpc' => '2.0',
+            'method' => 'bridge.get_ranked_posts',
+            'params' =>
+            array(
+                'tag' => $tagsname,
+                'sort' => 'created',
+                'limit' => $limit,
+                'start_author' => $startAuthor,
+                'start_permlink' => $startPermalink,
+                'observer' => NULL,
+            ),
+        ));
+
+
+
+        // $data = '{"id":11,"jsonrpc":"2.0","method":"bridge.get_ranked_posts","params":{"tag":"' . $communityName . '","sort":"created","limit":21,"start_author":null,"start_permlink":null,"observer":null}}';
+        $response = cUrl($data);
+        return json_decode($response);
+        // $data = '{"id":2,"jsonrpc":"2.0","method":"bridge.list_all_subscriptions","params":{"account":"peak.featured"}}';
+
+    }
+}
 
 
 if (!function_exists('cUrl')) {
