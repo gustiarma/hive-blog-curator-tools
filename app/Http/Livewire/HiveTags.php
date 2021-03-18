@@ -12,6 +12,8 @@ class HiveTags extends Component
     public $maxHour = 2;
     public $tagPosts = [];
 
+    public $selectedServer = 'https://peakd.com/';
+
     //
     public $ttl = 300;
 

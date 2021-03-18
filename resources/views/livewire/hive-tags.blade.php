@@ -82,6 +82,9 @@
                     {{ $item->author }}</a>
                 </div>
 
+
+
+
                 <div class="flex flex-row p-1 border-grey-500 items-center text-center">
                   <div class="w-5 h-5 rounded-full text-white bg-red-800 self-center items-center text-center h-auto">
                     $
@@ -98,6 +101,17 @@
                   <div class="ml-1">{{ getMinuteAfterPosted($item->created) }}</div>
 
                 </div>
+                @isset($item->community)
+                  <div class="flex flex-row p-1 border-grey-500 items-center text-center">
+                    <div class="w-5 h-5 rounded-full text-white bg-purple-800 self-center items-center text-center h-auto">
+                      Posted
+                    </div>
+                    <div class="ml-1">
+                      <a href="{{ $selectedServer . 'c/' . $item->community }}" class="" target="_blank">
+                        {{ $item->community_title }}</a>
+                    </div>
+                  </div>
+                @endisset
 
               </div>
 
