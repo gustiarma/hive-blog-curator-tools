@@ -16,6 +16,27 @@ class HiveCom extends Component
     public $ttl = 300;
 
     public $selectedCommunity;
+
+    public $communityPosts;
+
+    public function loadMore()
+    {
+
+        $lastPermalink = end($this->communityPosts)['permlink'];
+        $lastAuthor = end($this->communityPosts)['author'];
+
+        $newData = getTagPosts($this->selectedCommunity, $this->limitPost, $lastAuthor, $lastPermalink);
+
+
+        if (isset($newData->result)) {
+
+            foreach ($newData->result as $result) {
+
+                array_push($this->communityPosts, $result);
+            }
+        }
+
+    }
     public function getCommunityInfoProperty()
     {
         // dd(getCommunityInfo($this->selectedCommunity));
@@ -34,19 +55,28 @@ class HiveCom extends Component
     }
     public function getCommunityPostsProperty()
     {
+
+        $data = getCommunityPosts($this->selectedCommunity, $this->limitPost);
+        if (isset($data->result)) {
+            return $data->result;
+        }
         // dd(getCommunityPosts($this->selectedCommunity, $this->limitPost)->result);
-        $communityInfo =   Cache::remember('community-posts-' . $this->selectedCommunity, $this->ttl, function () {
-            $data = getCommunityPosts($this->selectedCommunity, $this->limitPost);
-            if (isset(getCommunityPosts($this->selectedCommunity, $this->limitPost)->result)) {
-                $data = getCommunityPosts($this->selectedCommunity, $this->limitPost)->result;
-                return $data;
-            } else {
-                Cache::forget('community-posts-' . $this->selectedCommunity);
-                return [];
-            }
-            // return getCommunityPosts($this->selectedCommunity, $this->limitPost)->result;
-        });
-        return $communityInfo;
+        // $communityInfo =   Cache::remember('community-posts-' . $this->selectedCommunity, $this->ttl, function () {
+        //     $data = getCommunityPosts($this->selectedCommunity, $this->limitPost);
+        //     if (isset($data->result)) {
+        //         return $data->result;
+        //     }
+
+        //     // if (isset(getCommunityPosts($this->selectedCommunity, $this->limitPost)->result)) {
+        //     //     $data = getCommunityPosts($this->selectedCommunity, $this->limitPost)->result;
+        //     //     return $data;
+        //     // } else {
+        //     //     Cache::forget('community-posts-' . $this->selectedCommunity);
+        //     //     return [];
+        //     // }
+        //     // return getCommunityPosts($this->selectedCommunity, $this->limitPost)->result;
+        // });
+        // return $communityInfo;
     }
 
 
@@ -58,6 +88,11 @@ class HiveCom extends Component
     public function mount($community)
     {
         $this->selectedCommunity  = $community;
+        $initialPosts = getCommunityPosts($community, $this->limitPost);
+
+        if (isset($initialPosts->result)) {
+            $this->communityPosts = $initialPosts->result;
+        }
     }
 
     public function subMaxPayout()
