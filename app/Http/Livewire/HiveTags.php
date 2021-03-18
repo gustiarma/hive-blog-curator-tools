@@ -19,10 +19,28 @@ class HiveTags extends Component
 
     public $selectedTags;
 
+
+    public function loadMore()
+    {
+
+        $lastPermalink = end($this->tagPosts)['permlink'];
+        $lastAuthor = end($this->tagPosts)['author'];
+
+        $newData = getTagPosts($this->selectedTags, $this->limitPost, $lastAuthor, $lastPermalink);
+        if (isset($newData->result)) {
+
+            foreach ($newData->result as $result) {
+
+                array_push($this->tagPosts, $result);
+            }
+        }
+    }
     public function searchTag()
     {
 
+
         $this->tagPost  = null;
+
 
         $this->tagPosts = $this->findPostByTags($this->selectedTags);
     }
@@ -44,19 +62,31 @@ class HiveTags extends Component
     }
     public function findPostByTags($tagsname)
     {
+
+        $data = getTagPosts($tagsname, $this->limitPost);
+
         if ($tagsname !== null && $tagsname !== '') {
-            $tagPost =   Cache::remember('community-tags-' . $tagsname, $this->ttl, function () use ($tagsname) {
-                $data = getTagPosts($tagsname, $this->limitPost);
-                if (isset(getTagPosts($tagsname, $this->limitPost)->result)) {
-                    $data = getTagPosts($tagsname, $this->limitPost)->result;
-                    return $data;
-                } else {
-                    Cache::forget('community-tags-' . $tagsname);
-                    return [];
-                }
-                // return getCommunityPosts($this->selectedTags, $this->limitPost)->result;
-            });
-            return $tagPost;
+
+            $data = getTagPosts($tagsname, $this->limitPost);
+            if (isset($data->result)) {
+                return $data->result;
+            } else {
+                return [];
+            }
+
+            // $tagPost =   Cache::remember('community-tags-' . $tagsname, $this->ttl, function () use ($tagsname) {
+            //     $data = getTagPosts($tagsname, $this->limitPost);
+            //     if (isset($data->result)) {
+            //         return $data->result;
+            //     } else {
+            //         return [];
+            //     }
+
+            //     // return getCommunityPosts($this->selectedTags, $this->limitPost)->result;
+            // });
+
+
+            return $data;
         } else {
             return [];
         }

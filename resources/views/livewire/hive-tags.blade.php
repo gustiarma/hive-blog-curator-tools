@@ -140,7 +140,14 @@
     @endforelse
   </ul>
 
+  @if (count($tagPosts) > 0)
 
+    <div class="container flex items-center pt-5 ">
+      <button class="h-10 w-full p-2 text-white rounded-lg bg-red-500 hover:bg-red-600" wire:click="loadMore">Load
+        More</button>
+
+    </div>
+  @endif
 
 
 
